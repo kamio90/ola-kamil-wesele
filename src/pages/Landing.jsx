@@ -10,11 +10,11 @@ const Landing = () => {
 
   // All available images in public/img
   const images = [
-    '/img/IMG_1529.HEIC',
+    '/img/IMG_1529.JPG',
     '/img/IMG_5330.JPG',
-    '/img/IMG_6405.HEIC',
-    '/img/IMG_6563.HEIC',
-    '/img/IMG_6607.HEIC',
+    '/img/IMG_6405.JPG',
+    '/img/IMG_6563.JPG',
+    '/img/IMG_6607.JPG',
   ];
 
   // Generate multiple random images for display

@@ -20,9 +20,11 @@ const Landing = () => {
 
   // Polaroid-style accent photos in fixed positions
   const polaroidPhotos = [
-    { src: '/img/IMG_5330.JPG', position: 'top-8 left-8', rotation: -6 },
-    { src: '/img/IMG_6563.JPG', position: 'top-12 right-12', rotation: 8 },
-    { src: '/img/IMG_6405.JPG', position: 'bottom-16 left-16', rotation: -4 },
+    { src: '/img/IMG_5330.JPG', position: 'top-8 left-8', rotation: -6, size: 'w-48 h-56' },
+    { src: '/img/IMG_6563.JPG', position: 'top-12 right-12', rotation: 8, size: 'w-44 h-52' },
+    { src: '/img/IMG_6405.JPG', position: 'bottom-20 left-12', rotation: -4, size: 'w-52 h-60' },
+    { src: '/img/IMG_1529.JPG', position: 'bottom-16 right-16', rotation: 5, size: 'w-48 h-56' },
+    { src: '/img/IMG_6607.JPG', position: 'top-1/2 left-4', rotation: -8, size: 'w-40 h-48' },
   ];
 
   // Carousel for main background
@@ -95,7 +97,7 @@ const Landing = () => {
         {polaroidPhotos.map((photo, index) => (
           <div
             key={index}
-            className={`absolute ${photo.position} w-48 h-56 bg-white p-3 shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl`}
+            className={`absolute ${photo.position} ${photo.size} bg-white p-3 shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl`}
             style={{
               transform: `rotate(${photo.rotation}deg)`,
               zIndex: 5,

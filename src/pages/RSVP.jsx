@@ -21,6 +21,7 @@ const RSVP = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [hasCompanion, setHasCompanion] = useState(false);
 
   useEffect(() => {
     // If no guest data, redirect to landing
@@ -32,7 +33,7 @@ const RSVP = () => {
     // Pre-fill form with existing data
     setFormData({
       status: guest.status || '',
-      companion: guest.companion || '',
+      companion: (guest.companion === 'TAK' || guest.companion === 'Tak') ? '' : (guest.companion || ''),
       accommodation: guest.accommodation || '',
       transport: guest.transport || '',
       dietary: guest.dietary || '',
@@ -40,6 +41,18 @@ const RSVP = () => {
       phone: guest.phone || '',
       additionalInfo: guest.additionalInfo || '',
     });
+
+    // Set hasCompanion based on existing data
+    if (guest.companion && guest.companion !== '' && guest.companion !== 'TAK' && guest.companion !== 'Tak') {
+      // Guest has a companion name already
+      setHasCompanion(true);
+    } else if (guest.companion === 'TAK' || guest.companion === 'Tak') {
+      // Guest is marked as having companion but no name yet
+      setHasCompanion(true);
+    } else {
+      // No companion
+      setHasCompanion(false);
+    }
   }, [guest, navigate]);
 
   if (!guest) {
@@ -100,10 +113,6 @@ const RSVP = () => {
 
   const firstName = guest.name.split(' ')[0];
   const showExtraFields = formData.status === 'TAK';
-  // Show companion input only if guest has 'TAK' - means they can bring someone
-  const needsCompanionInput = guest.companion === 'TAK';
-  // Show companion name if already specified (not empty and not 'TAK')
-  const hasCompanionName = guest.companion && guest.companion !== 'TAK';
 
   if (submitted) {
     return (
@@ -178,7 +187,7 @@ const RSVP = () => {
                 <p>Sielsko Anielsko - Szklana Stodoła Weselna</p>
                 <p className="text-sm text-text-light">Niesadna-Przecinka 33, 08-440 Niesadna</p>
                 <a
-                  href="https://www.google.com/maps/place/Sielsko+Anielsko+-+Szklana+Stodo%C5%82a+Weselna/@52.2278125,21.7603125,17z"
+                  href="https://maps.app.goo.gl/ZCkYCfXWfiodWHXT8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:text-primary-dark underline"
@@ -240,31 +249,57 @@ const RSVP = () => {
             {/* Conditional fields for "TAK" */}
             {showExtraFields && (
               <>
-                {/* Companion - only show if guest has companion field set */}
-                {needsCompanionInput && (
-                  <div>
-                    <label htmlFor="companion" className="block text-text-dark font-semibold mb-2">
-                      Osoba towarzysząca
-                    </label>
-                    <input
-                      type="text"
-                      id="companion"
-                      name="companion"
-                      value={formData.companion === 'TAK' ? '' : formData.companion}
-                      onChange={handleChange}
-                      placeholder="Imię i nazwisko"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    />
+                {/* Companion */}
+                <div>
+                  <label className="block text-text-dark font-semibold mb-3">
+                    Czy przyjeżdżasz z osobą towarzyszącą?
+                  </label>
+                  <div className="grid grid-cols-2 gap-2 mb-4">
+                    {['TAK', 'NIE'].map((option) => (
+                      <label
+                        key={option}
+                        className="flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-all hover:border-primary text-center"
+                        style={{
+                          borderColor: (option === 'TAK' ? hasCompanion : !hasCompanion) ? 'var(--primary)' : '#e5e7eb',
+                          backgroundColor: (option === 'TAK' ? hasCompanion : !hasCompanion) ? 'rgba(102, 126, 234, 0.05)' : 'transparent',
+                        }}
+                      >
+                        <input
+                          type="radio"
+                          name="hasCompanion"
+                          value={option}
+                          checked={option === 'TAK' ? hasCompanion : !hasCompanion}
+                          onChange={(e) => {
+                            setHasCompanion(e.target.value === 'TAK');
+                            if (e.target.value === 'NIE') {
+                              setFormData(prev => ({ ...prev, companion: '' }));
+                            }
+                          }}
+                          className="sr-only"
+                        />
+                        <span className="text-sm font-medium">{option}</span>
+                      </label>
+                    ))}
                   </div>
-                )}
 
-                {hasCompanionName && (
-                  <div className="p-4 bg-purple-50 rounded-xl">
-                    <p className="text-text-dark">
-                      <span className="font-semibold">Osoba towarzysząca:</span> {guest.companion}
-                    </p>
-                  </div>
-                )}
+                  {/* Companion name input - only show if hasCompanion is true */}
+                  {hasCompanion && (
+                    <div>
+                      <label htmlFor="companion" className="block text-text-dark font-semibold mb-2">
+                        Imię i nazwisko osoby towarzyszącej
+                      </label>
+                      <input
+                        type="text"
+                        id="companion"
+                        name="companion"
+                        value={formData.companion}
+                        onChange={handleChange}
+                        placeholder="np. Jan Kowalski"
+                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                      />
+                    </div>
+                  )}
+                </div>
 
                 {/* Accommodation */}
                 <div>

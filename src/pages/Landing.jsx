@@ -33,7 +33,7 @@ const Landing = () => {
         left: Math.random() * 100,
         rotation: (Math.random() - 0.5) * 20, // -10 to +10 degrees
         scale: 0.8 + Math.random() * 0.6, // 0.8 to 1.4
-        opacity: 0.4 + Math.random() * 0.2, // 0.4 to 0.6 (40% to 60%)
+        opacity: 0.55 + Math.random() * 0.3, // 0.55 to 0.85 (55% to 85%)
         delay: Math.random() * 2,
       });
     }

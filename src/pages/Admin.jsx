@@ -66,17 +66,14 @@ const Admin = () => {
     const statusCounts = {
       TAK: guestsList.filter(g => g.status === 'TAK').length,
       NIE: guestsList.filter(g => g.status === 'NIE').length,
-      'NIE WIEM': guestsList.filter(g => g.status === 'NIE WIEM').length,
       OCZEKUJE: guestsList.filter(g => g.status === 'OCZEKUJE').length,
     };
     const accommodation = guestsList.filter(g => g.accommodation === 'TAK').length;
-    const transport = guestsList.filter(g => g.transport === 'TAK').length;
 
     setStats({
       total,
       ...statusCounts,
       accommodation,
-      transport,
     });
   };
 
@@ -222,7 +219,7 @@ const Admin = () => {
             📊 Statystyki
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-white rounded-lg">
               <div className="text-2xl font-bold text-primary">{stats.total}</div>
               <div className="text-xs text-text-light">Zaproszeni</div>
@@ -236,16 +233,8 @@ const Admin = () => {
               <div className="text-xs text-text-light">NIE ❌</div>
             </div>
             <div className="text-center p-3 bg-white rounded-lg">
-              <div className="text-2xl font-bold text-warning">{stats['NIE WIEM'] || 0}</div>
-              <div className="text-xs text-text-light">NIE WIEM 🤔</div>
-            </div>
-            <div className="text-center p-3 bg-white rounded-lg">
               <div className="text-2xl font-bold text-text-dark">{stats.accommodation || 0}</div>
               <div className="text-xs text-text-light">Noclegi 🛏️</div>
-            </div>
-            <div className="text-center p-3 bg-white rounded-lg">
-              <div className="text-2xl font-bold text-text-dark">{stats.transport || 0}</div>
-              <div className="text-xs text-text-light">Transport 🚗</div>
             </div>
           </div>
 
@@ -292,7 +281,6 @@ const Admin = () => {
                 <option>Wszyscy</option>
                 <option>TAK</option>
                 <option>NIE</option>
-                <option>NIE WIEM</option>
                 <option>OCZEKUJE</option>
               </select>
             </div>
@@ -310,7 +298,6 @@ const Admin = () => {
                   <th className="px-4 py-3 text-left font-semibold">Token</th>
                   <th className="px-4 py-3 text-left font-semibold">Status</th>
                   <th className="px-4 py-3 text-left font-semibold">Nocleg</th>
-                  <th className="px-4 py-3 text-left font-semibold">Transport</th>
                   <th className="px-4 py-3 text-left font-semibold">Email</th>
                   <th className="px-4 py-3 text-left font-semibold">Telefon</th>
                   <th className="px-4 py-3 text-left font-semibold">Uwagi</th>
@@ -338,13 +325,11 @@ const Admin = () => {
                           <option>OCZEKUJE</option>
                           <option>TAK</option>
                           <option>NIE</option>
-                          <option>NIE WIEM</option>
                         </select>
                       ) : (
                         <span className={`px-2 py-1 rounded text-xs font-medium ${
                           guest.status === 'TAK' ? 'bg-success/20 text-success' :
                           guest.status === 'NIE' ? 'bg-error/20 text-error' :
-                          guest.status === 'NIE WIEM' ? 'bg-warning/20 text-warning' :
                           'bg-gray-200 text-gray-700'
                         }`}>
                           {guest.status}
@@ -367,32 +352,9 @@ const Admin = () => {
                           <option value="">-</option>
                           <option>TAK</option>
                           <option>NIE</option>
-                          <option>SAMI</option>
-                          <option>WRACAM</option>
                         </select>
                       ) : (
                         guest.accommodation || '-'
-                      )}
-                    </td>
-                    <td
-                      id={`cell-${guest.id}-transport`}
-                      className="px-4 py-3 transition-colors"
-                      onClick={() => setEditingCell({ id: guest.id, field: 'transport' })}
-                    >
-                      {editingCell?.id === guest.id && editingCell?.field === 'transport' ? (
-                        <select
-                          autoFocus
-                          value={guest.transport}
-                          onChange={(e) => handleCellEdit(guest.id, 'transport', e.target.value)}
-                          onBlur={() => setEditingCell(null)}
-                          className="w-full px-2 py-1 border rounded"
-                        >
-                          <option value="">-</option>
-                          <option>TAK</option>
-                          <option>WŁASNY</option>
-                        </select>
-                      ) : (
-                        guest.transport || '-'
                       )}
                     </td>
                     <td className="px-4 py-3 text-xs">{guest.email || '-'}</td>

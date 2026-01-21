@@ -214,7 +214,6 @@ const RSVP = () => {
                 {[
                   { value: 'TAK', label: 'Tak, będę! ✅', emoji: '✅' },
                   { value: 'NIE', label: 'Niestety nie mogę 😢', emoji: '😢' },
-                  { value: 'NIE WIEM', label: 'Jeszcze nie wiem 🤔', emoji: '🤔' },
                 ].map((option) => (
                   <label
                     key={option.value}
@@ -272,8 +271,8 @@ const RSVP = () => {
                   <label className="block text-text-dark font-semibold mb-3">
                     Potrzebujesz noclegu?
                   </label>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {['TAK', 'NIE', 'SAMI', 'WRACAM'].map((option) => (
+                  <div className="grid grid-cols-2 gap-2">
+                    {['TAK', 'NIE'].map((option) => (
                       <label
                         key={option}
                         className="flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-all hover:border-primary text-center"
@@ -287,35 +286,6 @@ const RSVP = () => {
                           name="accommodation"
                           value={option}
                           checked={formData.accommodation === option}
-                          onChange={handleChange}
-                          className="sr-only"
-                        />
-                        <span className="text-sm font-medium">{option}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Transport */}
-                <div>
-                  <label className="block text-text-dark font-semibold mb-3">
-                    Potrzebujesz transportu?
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {['TAK', 'WŁASNY'].map((option) => (
-                      <label
-                        key={option}
-                        className="flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-all hover:border-primary text-center"
-                        style={{
-                          borderColor: formData.transport === option ? 'var(--primary)' : '#e5e7eb',
-                          backgroundColor: formData.transport === option ? 'rgba(102, 126, 234, 0.05)' : 'transparent',
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name="transport"
-                          value={option}
-                          checked={formData.transport === option}
                           onChange={handleChange}
                           className="sr-only"
                         />

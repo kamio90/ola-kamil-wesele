@@ -6,7 +6,6 @@ const Landing = () => {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [backgroundImage, setBackgroundImage] = useState('');
   const navigate = useNavigate();
 
   // All available images in public/img
@@ -18,22 +17,28 @@ const Landing = () => {
     '/img/IMG_6607.HEIC',
   ];
 
-  // Load and rotate background images
+  // Generate multiple random images for display
+  const [displayImages, setDisplayImages] = useState([]);
+
   useEffect(() => {
-    const selectRandomImage = () => {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      setBackgroundImage(images[randomIndex]);
-    };
+    // Create array of 12-15 random image selections with positions
+    const imageCount = 12 + Math.floor(Math.random() * 4); // 12-15 images
+    const newImages = [];
 
-    // Initial image
-    selectRandomImage();
+    for (let i = 0; i < imageCount; i++) {
+      const randomImage = images[Math.floor(Math.random() * images.length)];
+      newImages.push({
+        src: randomImage,
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        rotation: (Math.random() - 0.5) * 20, // -10 to +10 degrees
+        scale: 0.8 + Math.random() * 0.6, // 0.8 to 1.4
+        opacity: 0.15 + Math.random() * 0.15, // 0.15 to 0.3
+        delay: Math.random() * 2,
+      });
+    }
 
-    // Rotate images every 5 seconds
-    const interval = setInterval(() => {
-      selectRandomImage();
-    }, 5000);
-
-    return () => clearInterval(interval);
+    setDisplayImages(newImages);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -77,20 +82,32 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-white">
-      {/* Background image with zoom animation */}
-      {backgroundImage && (
-        <div className="absolute inset-0 transition-opacity duration-1000">
+      {/* Multiple background images scattered across the page */}
+      <div className="absolute inset-0 overflow-hidden">
+        {displayImages.map((img, index) => (
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            key={index}
+            className="absolute w-64 h-64 md:w-80 md:h-80"
             style={{
-              backgroundImage: `url(${backgroundImage})`,
-              animation: 'imageZoom 20s ease-in-out infinite',
+              top: `${img.top}%`,
+              left: `${img.left}%`,
+              transform: `translate(-50%, -50%) rotate(${img.rotation}deg) scale(${img.scale})`,
+              opacity: img.opacity,
+              animation: `imageZoom 20s ease-in-out infinite ${img.delay}s`,
             }}
-          ></div>
-          {/* Overlay for readability with botanical green tint */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-botanical-light/70 to-white/90"></div>
-        </div>
-      )}
+          >
+            <div
+              className="w-full h-full bg-cover bg-center rounded-2xl"
+              style={{
+                backgroundImage: `url(${img.src})`,
+              }}
+            ></div>
+          </div>
+        ))}
+
+        {/* Overlay for readability with botanical green tint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-botanical-light/80 to-white/90"></div>
+      </div>
 
       {/* Decorative botanical elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -100,60 +117,12 @@ const Landing = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-botanical/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Flying rings */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Ring 1 - top right */}
-        <div
-          className="absolute top-20 right-20 text-5xl opacity-30"
-          style={{
-            animation: 'floatRing1 8s ease-in-out infinite',
-          }}
-        >
-          💍
-        </div>
-        {/* Ring 2 - top left */}
-        <div
-          className="absolute top-32 left-16 text-6xl opacity-25"
-          style={{
-            animation: 'floatRing2 10s ease-in-out infinite 1s',
-          }}
-        >
-          💍
-        </div>
-        {/* Ring 3 - middle right */}
-        <div
-          className="absolute top-1/2 right-12 text-4xl opacity-20"
-          style={{
-            animation: 'floatRing1 12s ease-in-out infinite 2s',
-          }}
-        >
-          💍
-        </div>
-        {/* Ring 4 - bottom left */}
-        <div
-          className="absolute bottom-32 left-20 text-5xl opacity-15"
-          style={{
-            animation: 'floatRing2 9s ease-in-out infinite 1.5s',
-          }}
-        >
-          💍
-        </div>
-      </div>
-
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="text-center animate-fade-in-up">
-          {/* Central floating rings */}
-          <div className="relative inline-block mb-8">
-            <div className="text-6xl animate-float">💍</div>
-            <div
-              className="absolute top-0 left-0 text-4xl opacity-40"
-              style={{
-                animation: 'floatRing1 6s ease-in-out infinite',
-              }}
-            >
-              💍
-            </div>
+          {/* Single floating ring icon */}
+          <div className="text-6xl mb-8 animate-float">
+            💍
           </div>
 
           {/* Names */}

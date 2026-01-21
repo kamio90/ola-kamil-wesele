@@ -27,9 +27,6 @@ export default {
         'float': 'float 3s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
         'checkmark': 'checkmark 0.6s ease-out',
-        'float-ring-1': 'floatRing1 8s ease-in-out infinite',
-        'float-ring-2': 'floatRing2 10s ease-in-out infinite',
-        'image-zoom': 'imageZoom 20s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -50,22 +47,6 @@ export default {
           '0%': { transform: 'scale(0) rotate(45deg)' },
           '50%': { transform: 'scale(1.2) rotate(45deg)' },
           '100%': { transform: 'scale(1) rotate(45deg)' },
-        },
-        floatRing1: {
-          '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '25%': { transform: 'translate(30px, -20px) rotate(10deg)' },
-          '50%': { transform: 'translate(0, -40px) rotate(0deg)' },
-          '75%': { transform: 'translate(-30px, -20px) rotate(-10deg)' },
-        },
-        floatRing2: {
-          '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '25%': { transform: 'translate(-40px, -30px) rotate(-15deg)' },
-          '50%': { transform: 'translate(0, -50px) rotate(0deg)' },
-          '75%': { transform: 'translate(40px, -30px) rotate(15deg)' },
-        },
-        imageZoom: {
-          '0%, 100%': { transform: 'scale(1.05)' },
-          '50%': { transform: 'scale(1.15)' },
         },
       },
     },

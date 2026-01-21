@@ -6,6 +6,7 @@ const Landing = () => {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
   // All available images in public/img
@@ -17,29 +18,21 @@ const Landing = () => {
     '/img/IMG_6607.JPG',
   ];
 
-  // Generate multiple random images for display
-  const [displayImages, setDisplayImages] = useState([]);
+  // Polaroid-style accent photos in fixed positions
+  const polaroidPhotos = [
+    { src: '/img/IMG_5330.JPG', position: 'top-8 left-8', rotation: -6 },
+    { src: '/img/IMG_6563.JPG', position: 'top-12 right-12', rotation: 8 },
+    { src: '/img/IMG_6405.JPG', position: 'bottom-16 left-16', rotation: -4 },
+  ];
 
+  // Carousel for main background
   useEffect(() => {
-    // Create array of 12-15 random image selections with positions
-    const imageCount = 12 + Math.floor(Math.random() * 4); // 12-15 images
-    const newImages = [];
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
 
-    for (let i = 0; i < imageCount; i++) {
-      const randomImage = images[Math.floor(Math.random() * images.length)];
-      newImages.push({
-        src: randomImage,
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        rotation: (Math.random() - 0.5) * 20, // -10 to +10 degrees
-        scale: 0.8 + Math.random() * 0.6, // 0.8 to 1.4
-        opacity: 0.55 + Math.random() * 0.3, // 0.55 to 0.85 (55% to 85%)
-        delay: Math.random() * 2,
-      });
-    }
-
-    setDisplayImages(newImages);
-  }, []);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,11 +49,9 @@ const Landing = () => {
       const data = await checkToken(token);
 
       if (data.success) {
-        // Navigate to RSVP page with guest data
         navigate('/rsvp', { state: { guest: data.guest } });
       } else {
         setError('Nieprawidłowy kod. Sprawdź zaproszenie.');
-        // Add shake animation
         const input = document.getElementById('token-input');
         if (input) {
           input.classList.add('shake');
@@ -75,45 +66,52 @@ const Landing = () => {
   };
 
   const handleTokenChange = (e) => {
-    // Convert to uppercase automatically
     setToken(e.target.value.toUpperCase());
     setError('');
   };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-white">
-      {/* Multiple background images scattered across the page */}
-      <div className="absolute inset-0 overflow-hidden">
-        {displayImages.map((img, index) => (
+      {/* Full-screen background carousel */}
+      <div className="absolute inset-0">
+        {images.map((image, index) => (
+          <div
+            key={image}
+            className="absolute inset-0 transition-opacity duration-1000"
+            style={{
+              opacity: index === currentImageIndex ? 1 : 0,
+              backgroundImage: `url(${image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        ))}
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/60 to-white/70"></div>
+      </div>
+
+      {/* Polaroid-style accent photos (hidden on mobile) */}
+      <div className="absolute inset-0 pointer-events-none hidden lg:block">
+        {polaroidPhotos.map((photo, index) => (
           <div
             key={index}
-            className="absolute w-64 h-64 md:w-80 md:h-80"
+            className={`absolute ${photo.position} w-48 h-56 bg-white p-3 shadow-2xl transition-transform hover:scale-105 hover:shadow-3xl`}
             style={{
-              top: `${img.top}%`,
-              left: `${img.left}%`,
-              transform: `translate(-50%, -50%) rotate(${img.rotation}deg) scale(${img.scale})`,
-              opacity: img.opacity,
-              animation: `imageZoom 20s ease-in-out infinite ${img.delay}s`,
+              transform: `rotate(${photo.rotation}deg)`,
+              zIndex: 5,
             }}
           >
             <div
-              className="w-full h-full bg-cover bg-center rounded-2xl"
-              style={{
-                backgroundImage: `url(${img.src})`,
-              }}
-            ></div>
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${photo.src})` }}
+            />
           </div>
         ))}
-
-        {/* Overlay for readability with botanical green tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-botanical-light/40 to-white/50"></div>
       </div>
 
       {/* Decorative botanical elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Top left corner botanical accent */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        {/* Bottom right corner botanical accent */}
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-botanical/5 rounded-full blur-3xl"></div>
       </div>
 
@@ -126,19 +124,19 @@ const Landing = () => {
           </div>
 
           {/* Names */}
-          <h1 className="text-5xl md:text-7xl font-heading font-bold text-primary-dark mb-4">
+          <h1 className="text-5xl md:text-7xl font-heading font-bold text-primary-dark mb-4 drop-shadow-lg">
             Kamil & Ola
           </h1>
-          <p className="text-2xl md:text-3xl text-primary mb-2">2026</p>
+          <p className="text-2xl md:text-3xl text-primary mb-2 drop-shadow-md">2026</p>
 
           {/* Wedding details */}
-          <div className="mb-8 space-y-1 text-text-dark">
+          <div className="mb-8 space-y-1 text-text-dark drop-shadow-md">
             <p className="text-xl md:text-2xl font-semibold">2 lipca 2026</p>
             <p className="text-lg md:text-xl">Sielsko Anielsko, Niesadna</p>
           </div>
 
           {/* Token input card */}
-          <div className="glass-card p-8 md:p-10 max-w-md mx-auto shadow-xl">
+          <div className="glass-card p-8 md:p-10 max-w-md mx-auto shadow-2xl">
             <h2 className="text-xl md:text-2xl font-heading mb-6 text-text-dark">
               Wpisz swój kod z zaproszenia
             </h2>

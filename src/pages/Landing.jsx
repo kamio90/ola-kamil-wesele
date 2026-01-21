@@ -7,6 +7,7 @@ const Landing = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [polaroidPhotos, setPolaroidPhotos] = useState([]);
   const navigate = useNavigate();
 
   // All available images in public/img
@@ -18,14 +19,48 @@ const Landing = () => {
     '/img/IMG_6607.JPG',
   ];
 
-  // Polaroid-style accent photos in fixed positions
-  const polaroidPhotos = [
-    { src: '/img/IMG_5330.JPG', position: 'top-8 left-8', rotation: -6, size: 'w-48 h-56' },
-    { src: '/img/IMG_6563.JPG', position: 'top-12 right-12', rotation: 8, size: 'w-44 h-52' },
-    { src: '/img/IMG_6405.JPG', position: 'bottom-20 left-12', rotation: -4, size: 'w-52 h-60' },
-    { src: '/img/IMG_1529.JPG', position: 'bottom-16 right-16', rotation: 5, size: 'w-48 h-56' },
-    { src: '/img/IMG_6607.JPG', position: 'top-1/2 left-4', rotation: -8, size: 'w-40 h-48' },
+  // Possible positions for polaroid photos
+  const possiblePositions = [
+    'top-8 left-8',
+    'top-12 right-12',
+    'top-8 right-8',
+    'top-16 left-16',
+    'top-20 right-20',
+    'bottom-20 left-12',
+    'bottom-16 right-16',
+    'bottom-12 left-16',
+    'bottom-8 right-8',
+    'top-1/2 left-4',
+    'top-1/3 right-4',
+    'bottom-1/3 left-8',
   ];
+
+  // Possible sizes
+  const possibleSizes = [
+    'w-40 h-48',
+    'w-44 h-52',
+    'w-48 h-56',
+    'w-52 h-60',
+  ];
+
+  // Generate random polaroid photos on mount
+  useEffect(() => {
+    const count = 5 + Math.floor(Math.random() * 3); // 5-7 photos
+    const shuffledImages = [...images].sort(() => Math.random() - 0.5);
+    const shuffledPositions = [...possiblePositions].sort(() => Math.random() - 0.5);
+
+    const photos = [];
+    for (let i = 0; i < Math.min(count, images.length); i++) {
+      photos.push({
+        src: shuffledImages[i],
+        position: shuffledPositions[i],
+        rotation: (Math.random() - 0.5) * 16, // -8 to +8 degrees
+        size: possibleSizes[Math.floor(Math.random() * possibleSizes.length)],
+      });
+    }
+
+    setPolaroidPhotos(photos);
+  }, []);
 
   // Carousel for main background
   useEffect(() => {

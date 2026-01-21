@@ -236,12 +236,12 @@ This is a private wedding website. All rights reserved.
 
 ## 💖 Credits
 
-Built with love for Kamil & Ola's wedding on July 12, 2026.
+Built with love for Kamil & Ola's wedding on July 2, 2026.
 
 ---
 
 **Wedding Details:**
-- Date: 12 lipca 2026
+- Date: 2 lipca 2026
 - Ceremony: 15:00
 - Reception: 18:00
 - Venue: Sielsko Anielsko - Szklana Stodoła Weselna

@@ -159,7 +159,7 @@ const Admin = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-purple-200 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-white via-botanical-light to-white flex items-center justify-center p-4">
         <div className="glass-card p-8 max-w-md w-full">
           <button
             onClick={() => navigate('/')}
@@ -196,7 +196,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-purple-200 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-white via-botanical-light to-white py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -329,7 +329,7 @@ const Admin = () => {
                     {/* Category - editable */}
                     <td
                       id={`cell-${guest.id}-category`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'category' })}
                     >
                       {editingCell?.id === guest.id && editingCell?.field === 'category' ? (
@@ -354,7 +354,7 @@ const Admin = () => {
                     {/* Status - editable */}
                     <td
                       id={`cell-${guest.id}-status`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'status' })}
                     >
                       {editingCell?.id === guest.id && editingCell?.field === 'status' ? (
@@ -383,7 +383,7 @@ const Admin = () => {
                     {/* Companion - editable */}
                     <td
                       id={`cell-${guest.id}-companion`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'companion' })}
                       title={guest.companion || 'Brak'}
                     >
@@ -407,7 +407,7 @@ const Admin = () => {
                     {/* Accommodation - editable */}
                     <td
                       id={`cell-${guest.id}-accommodation`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'accommodation' })}
                     >
                       {editingCell?.id === guest.id && editingCell?.field === 'accommodation' ? (
@@ -442,7 +442,7 @@ const Admin = () => {
                     {/* Dietary - editable */}
                     <td
                       id={`cell-${guest.id}-dietary`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'dietary' })}
                       title={guest.dietary || 'Brak'}
                     >
@@ -466,7 +466,7 @@ const Admin = () => {
                     {/* Additional Info - editable */}
                     <td
                       id={`cell-${guest.id}-additionalInfo`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'additionalInfo' })}
                       title={guest.additionalInfo || 'Brak'}
                     >
@@ -490,7 +490,7 @@ const Admin = () => {
                     {/* Notes - editable */}
                     <td
                       id={`cell-${guest.id}-notes`}
-                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-purple-50"
+                      className="px-4 py-3 transition-colors cursor-pointer hover:bg-botanical-light/30"
                       onClick={() => setEditingCell({ id: guest.id, field: 'notes' })}
                       title={guest.notes || 'Brak'}
                     >

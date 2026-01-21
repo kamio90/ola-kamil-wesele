@@ -116,7 +116,7 @@ const RSVP = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-purple-200 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-white via-botanical-light to-white flex items-center justify-center p-4">
         <div className="glass-card p-8 md:p-12 max-w-md mx-auto text-center animate-fade-in-up">
           <div className="text-6xl mb-6">🎉</div>
           <h2 className="text-3xl font-heading font-bold text-primary-dark mb-4">
@@ -140,7 +140,7 @@ const RSVP = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-purple-200 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-white via-botanical-light to-white py-8 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Back button */}
         <button
@@ -168,7 +168,7 @@ const RSVP = () => {
               <span className="text-2xl">📅</span>
               <div>
                 <p className="font-semibold">Ślub</p>
-                <p>12 lipca 2026, 15:00</p>
+                <p>2 lipca 2026, 15:00</p>
               </div>
             </div>
 
@@ -176,7 +176,7 @@ const RSVP = () => {
               <span className="text-2xl">🎉</span>
               <div>
                 <p className="font-semibold">Wesele</p>
-                <p>12 lipca 2026, 18:00</p>
+                <p>2 lipca 2026, 18:00</p>
               </div>
             </div>
 
@@ -229,7 +229,7 @@ const RSVP = () => {
                     className="flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all hover:border-primary"
                     style={{
                       borderColor: formData.status === option.value ? 'var(--primary)' : '#e5e7eb',
-                      backgroundColor: formData.status === option.value ? 'rgba(102, 126, 234, 0.05)' : 'transparent',
+                      backgroundColor: formData.status === option.value ? 'var(--botanical-light)' : 'transparent',
                     }}
                   >
                     <input
@@ -261,7 +261,7 @@ const RSVP = () => {
                         className="flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-all hover:border-primary text-center"
                         style={{
                           borderColor: (option === 'TAK' ? hasCompanion : !hasCompanion) ? 'var(--primary)' : '#e5e7eb',
-                          backgroundColor: (option === 'TAK' ? hasCompanion : !hasCompanion) ? 'rgba(102, 126, 234, 0.05)' : 'transparent',
+                          backgroundColor: (option === 'TAK' ? hasCompanion : !hasCompanion) ? 'var(--botanical-light)' : 'transparent',
                         }}
                       >
                         <input
@@ -313,7 +313,7 @@ const RSVP = () => {
                         className="flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-all hover:border-primary text-center"
                         style={{
                           borderColor: formData.accommodation === option ? 'var(--primary)' : '#e5e7eb',
-                          backgroundColor: formData.accommodation === option ? 'rgba(102, 126, 234, 0.05)' : 'transparent',
+                          backgroundColor: formData.accommodation === option ? 'var(--botanical-light)' : 'transparent',
                         }}
                       >
                         <input

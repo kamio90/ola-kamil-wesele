@@ -100,7 +100,10 @@ const RSVP = () => {
 
   const firstName = guest.name.split(' ')[0];
   const showExtraFields = formData.status === 'TAK';
-  const needsCompanionInput = guest.companion === 'TAK' && !formData.companion;
+  // Show companion input only if guest has 'TAK' - means they can bring someone
+  const needsCompanionInput = guest.companion === 'TAK';
+  // Show companion name if already specified (not empty and not 'TAK')
+  const hasCompanionName = guest.companion && guest.companion !== 'TAK';
 
   if (submitted) {
     return (
@@ -156,7 +159,7 @@ const RSVP = () => {
               <span className="text-2xl">📅</span>
               <div>
                 <p className="font-semibold">Ślub</p>
-                <p>15 sierpnia 2026, 14:00</p>
+                <p>12 lipca 2026, 15:00</p>
               </div>
             </div>
 
@@ -164,7 +167,7 @@ const RSVP = () => {
               <span className="text-2xl">🎉</span>
               <div>
                 <p className="font-semibold">Wesele</p>
-                <p>15 sierpnia 2026, 17:00</p>
+                <p>12 lipca 2026, 18:00</p>
               </div>
             </div>
 
@@ -172,10 +175,10 @@ const RSVP = () => {
               <span className="text-2xl">📍</span>
               <div>
                 <p className="font-semibold">Miejsce</p>
-                <p>Dwór Czarownica</p>
-                <p className="text-sm text-text-light">ul. Główna 1, Oszczywilk</p>
+                <p>Sielsko Anielsko - Szklana Stodoła Weselna</p>
+                <p className="text-sm text-text-light">Niesadna-Przecinka 33, 08-440 Niesadna</p>
                 <a
-                  href="https://maps.google.com/?q=Dwór+Czarownica+Oszczywilk"
+                  href="https://www.google.com/maps/place/Sielsko+Anielsko+-+Szklana+Stodo%C5%82a+Weselna/@52.2278125,21.7603125,17z"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-primary hover:text-primary-dark underline"
@@ -238,7 +241,7 @@ const RSVP = () => {
             {/* Conditional fields for "TAK" */}
             {showExtraFields && (
               <>
-                {/* Companion */}
+                {/* Companion - only show if guest has companion field set */}
                 {needsCompanionInput && (
                   <div>
                     <label htmlFor="companion" className="block text-text-dark font-semibold mb-2">
@@ -248,7 +251,7 @@ const RSVP = () => {
                       type="text"
                       id="companion"
                       name="companion"
-                      value={formData.companion}
+                      value={formData.companion === 'TAK' ? '' : formData.companion}
                       onChange={handleChange}
                       placeholder="Imię i nazwisko"
                       className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
@@ -256,7 +259,7 @@ const RSVP = () => {
                   </div>
                 )}
 
-                {guest.companion && guest.companion !== 'TAK' && (
+                {hasCompanionName && (
                   <div className="p-4 bg-purple-50 rounded-xl">
                     <p className="text-text-dark">
                       <span className="font-semibold">Osoba towarzysząca:</span> {guest.companion}

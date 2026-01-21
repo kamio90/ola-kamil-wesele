@@ -236,15 +236,18 @@ This is a private wedding website. All rights reserved.
 
 ## 💖 Credits
 
-Built with love for Kamil & Ola's wedding on August 15, 2026.
+Built with love for Kamil & Ola's wedding on July 12, 2026.
 
 ---
 
 **Wedding Details:**
-- Date: 15 sierpnia 2026
-- Ceremony: 14:00
-- Reception: 17:00
-- Venue: Dwór Czarownica, Oszczywilk
+- Date: 12 lipca 2026
+- Ceremony: 15:00
+- Reception: 18:00
+- Venue: Sielsko Anielsko - Szklana Stodoła Weselna
+- Address: Niesadna-Przecinka 33, 08-440 Niesadna
+- Website: sielsko-anielsko.pl
+- Phone: 530 055 535
 
 **Total Guests**: 89
 

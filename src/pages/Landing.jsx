@@ -68,8 +68,8 @@ const Landing = () => {
 
           {/* Wedding details */}
           <div className="mb-8 space-y-1 text-text-dark">
-            <p className="text-xl md:text-2xl">15 sierpnia 2026</p>
-            <p className="text-lg md:text-xl">Dwór Czarownica, Oszczywilk</p>
+            <p className="text-xl md:text-2xl">12 lipca 2026</p>
+            <p className="text-lg md:text-xl">Sielsko Anielsko, Niesadna</p>
           </div>
 
           {/* Token input card */}

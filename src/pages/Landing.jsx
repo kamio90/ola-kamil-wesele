@@ -12,11 +12,36 @@ const Landing = () => {
 
   // All available images in public/img
   const images = [
+    '/img/F7E8E50F-9334-4DD8-8F52-B3099337E8A6.JPG',
+    '/img/IMG_0004.JPG',
+    '/img/IMG_1527.JPG',
     '/img/IMG_1529.JPG',
+    '/img/IMG_4720.JPG',
+    '/img/IMG_4968.JPG',
+    '/img/IMG_5038.JPG',
+    '/img/IMG_5066.JPG',
+    '/img/IMG_5277.JPG',
     '/img/IMG_5330.JPG',
+    '/img/IMG_5513.JPG',
+    '/img/IMG_5541.JPG',
+    '/img/IMG_6009.JPG',
+    '/img/IMG_6010.JPG',
     '/img/IMG_6405.JPG',
+    '/img/IMG_6410.JPG',
     '/img/IMG_6563.JPG',
     '/img/IMG_6607.JPG',
+    '/img/IMG_6666.JPG',
+    '/img/IMG_6762.JPG',
+    '/img/IMG_7476.JPG',
+    '/img/IMG_7668.JPG',
+    '/img/IMG_7814.JPG',
+    '/img/IMG_8043.JPG',
+    '/img/IMG_8604.JPG',
+    '/img/IMG_8694.JPG',
+    '/img/IMG_8925.JPG',
+    '/img/IMG_9071.JPG',
+    '/img/IMG_9098.JPG',
+    '/img/IMG_9143.JPG',
   ];
 
   // Possible positions for polaroid photos

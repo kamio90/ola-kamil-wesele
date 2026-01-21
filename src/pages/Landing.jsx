@@ -33,7 +33,7 @@ const Landing = () => {
         left: Math.random() * 100,
         rotation: (Math.random() - 0.5) * 20, // -10 to +10 degrees
         scale: 0.8 + Math.random() * 0.6, // 0.8 to 1.4
-        opacity: 0.15 + Math.random() * 0.15, // 0.15 to 0.3
+        opacity: 0.4 + Math.random() * 0.2, // 0.4 to 0.6 (40% to 60%)
         delay: Math.random() * 2,
       });
     }
@@ -106,7 +106,7 @@ const Landing = () => {
         ))}
 
         {/* Overlay for readability with botanical green tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-botanical-light/80 to-white/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-botanical-light/40 to-white/50"></div>
       </div>
 
       {/* Decorative botanical elements */}
